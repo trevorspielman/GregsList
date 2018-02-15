@@ -1,0 +1,31 @@
+input {
+  margin: .5rem;
+}
+
+.listingImage {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.headers {
+  background-color: #293275;
+  color: white;
+}
+
+.categoryButton {
+  margin-top: .5rem;
+}
+
+.listing {
+  padding: .2rem;
+}
+
+.hidden {
+  height: 0;
+  opacity: 0;
+  cursor: default;
+}
+
+.transition {
+  transition: all .5s linear;
+}
