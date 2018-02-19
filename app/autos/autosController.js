@@ -2,104 +2,122 @@ function AutosController() {
     var autosService = new AutosService()
     var addCarElem = document.getElementById('addCar')
     var carFormElem = document.getElementById('car-form')
-    var manufacElem = document.getElementById('manufac-form')
-    var modelElem = document.getElementById('model-form')
     var thirdFormElem = document.getElementById('third-form-section')
     var finalFormElem = document.getElementById('final-form-section')
     var carPriceElem = document.getElementById('car-price')
     var submitButtonElem = document.getElementById('submit-button')
+    //region old form info
 
-    addCarElem.addEventListener("click", function (event) {
-        console.log("am I reaching here?")
-        addCarElem.classList.add('hidden')
-        carFormElem.classList.remove('hidden')
-        manufacElem.classList.remove('hidden')
-        autosService.getManufacturers(drawManufac)
-    })
+    // this.getManufacturers = function getManufacturers(){
+    //     autosService.getManufacturers(drawManufac)
+    //     autosService.getModels(drawModels)
+    // }
+    // autosService.getManufacturers(drawManufac)
+    // autosService.getModels(drawModels)
 
-    manufacElem.addEventListener('change', function (event) {
-        modelElem.classList.remove('hidden')
-        var query = event.target.value
-        autosService.getModels(query, drawModels)
-    })
-    modelElem.addEventListener('change', function (event) {
-        thirdFormElem.classList.remove('hidden')
-        finalFormElem.classList.remove('hidden')
-    })
+    // // addCarElem.addEventListener("click", function (event) {
+    // //     console.log("am I reaching here?")
+    // //     addCarElem.classList.add('hidden')
+    // //     carFormElem.classList.remove('hidden')
+    // //     manufacElem.classList.remove('hidden')
+    // //     autosService.getManufacturers(drawManufac)
+    // //  })
 
-    carPriceElem.addEventListener('keydown', function (event) {
-        submitButtonElem.classList.remove('hidden')
+    // // manufacElem.addEventListener('change', function (event) {
+    // //     //  modelElem.classList.remove('hidden')
+    // //     var query = event.target.value
+    // //     autosService.getModels(query, drawModels)
+    // // })
+    // // modelElem.addEventListener('change', function (event) {
+    // //     //  thirdFormElem.classList.remove('hidden')
+    // //     //  finalFormElem.classList.remove('hidden')
+    // // })
 
-    })
+    // // carPriceElem.addEventListener('keydown', function (event) {
+    // //     //  submitButtonElem.classList.remove('hidden')
 
-    function drawManufac(manufacRes) {
-        var manufacTemplate = ``
-        for (let i = 0; i < manufacRes.Results.length; i++) {
-            const manufacturer = manufacRes.Results[i];
-            manufacTemplate += `
-            <option>${manufacturer.Mfr_CommonName}</option>
-            `
-        }
-        manufacElem.innerHTML = manufacTemplate
+    // // })
+
+    // function drawManufac(manufacRes) {
+    //     var manufacElem = document.getElementById('manufac-form')
+    //     var manufacTemplate = ``
+    //     for (let i = 0; i < manufacRes.Results.length; i++) {
+    //         const manufacturer = manufacRes.Results[i];
+    //         // if(manufacturer == manufacRes.results[i+1]){
+    //         //     continue
+    //         // }else{
+    //         manufacTemplate += `
+    //             <option>${manufacturer.Mfr_CommonName}</option>
+    //             `
+    //         // }
+    //     }
+    //     manufacElem.innerHTML = manufacTemplate
+    // }
+
+    // function drawModels(modelsRes) {
+    //     var modelElem = document.getElementById('model-form')
+    //     var modelsTemplate = ``
+    //     for (let i = 0; i < modelsRes.Results.length; i++) {
+    //         const model = modelsRes.Results[i];
+    //         modelsTemplate += `
+    //         <option>${model.Model_Name}</option>
+    //         `
+    //     }
+    //     modelElem.innerHTML = modelsTemplate
+    // }
+
+    //endregion
+
+    function getCars() {
+        autosService.getCars(drawCar)
     }
 
-    function drawModels(modelsRes) {
-        var modelsTemplate = ``
-        for (let i = 0; i < modelsRes.Results.length; i++) {
-            const model = modelsRes.Results[i];
-            modelsTemplate += `
-            <option>${model.Model_Name}</option>
-            `
-        }
-        modelElem.innerHTML = modelsTemplate
-    }
-
-
-    function drawCar() {
-        var carArr = autosService.getCars()
+    function drawCar(cars) {
+        //var cars = autosService.getCars(carsArr)
+        //region carForm
         var carFormTemplate = `
-    <div class="col-6 d-flex justify-content-center">
-    <button class="m-2 btn-danger" type="submit" id="addCar">Add a Car?</button>
-    <form class="m-2 hidden" onsubmit="app.controllers.autosCtrl.addCar(event)" id="car-form">
+        <div class="col-6 d-flex justify-content-center">
+        <form class="m-2" onsubmit="app.controllers.autosCtrl.addCar(event)" id="car-form">
         <div class="form-row">
-            <label for="manufacturer-select">Manufacturer</label>
-            <select multiple class="form-control hidden transition" id="manufac-form" required>
-            </select>
-            <label for="manufacturer-select">Model</label>
-            <select multiple class="form-control hidden transition" id="model-form" required>
-            </select>
-        </div>
-        <div class="form-row hidden transition" id="third-form-section">
-            <input type="number" name="year" placeholder="Year" id="model-year" required>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="condition" value="0" required>
-                <label class="form-check-label" value="0">New</label>
+                <div class="col">
+                    <input type="text" name="make" placeholder="Make" required>
+                    <input type="text" name="model" placeholder="Model" required>
+                    <input type="url" name="img" placeholder="Image Link">
+                </div>
+                <div class="col">
+                    <input type="number" name="year" placeholder="Year Built">
+                    <input type="number" name="price" placeholder="Price" required>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="condition" value="1" required>
-                <label class="form-check-label">Like New</label>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="condition" value="0" required>
+                        <label class="form-check-label" value="0">New</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="condition" value="1" required>
+                        <label class="form-check-label" value="1">Like New</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="condition" value="2" required>
+                        <label class="form-check-label" value="2">Fair</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="condition" value="3" required>
+                        <label class="form-check-label" value="3">Junker</label>
+                    </div>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="condition" value="2" required>
-                <label class="form-check-label">Fair</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="condition" value="3" required>
-                <label class="form-check-label">Junker</label>
-            </div>
-        </div>
-        <div class="form-row hidden transition" id="final-form-section">
-            <input type="url" name="img" placeholder="Image Link" required>
-            <input id="car-price" type="number" name="price" placeholder="Price" required>
-            <button class="m-2 btn-success hidden transition" type="submit" id="submit-button">Submit</button>
-        </div>
-        </div>
+            <button class="m-2 btn-success" type="submit">Submit</button>
         </form>
+    </div>
              `
+        //endregion
         var carTemplate = ``
-        for (let i = 0; i < carArr.length; i++) {
-            const car = carArr[i];
-            car.condition = car.condition ? car.condition : "No Condition Provided"
+        for (let i = 0; i < cars.length; i++) {
+            const car = cars[i];
+            car.condition == car.condition ? car.condition : "No Condition Provided"
             carTemplate += `
             <div class="col-3">
             <h4>${car.year} ${car.make} ${car.model}</h4>
@@ -125,17 +143,16 @@ function AutosController() {
             condition: form.condition.value
         }
 
-        autosService.addCar(carObj)
+        autosService.addCar(carObj, drawCar)
         document.getElementById('car-form').reset()
-        drawCar()
+        getCars()
     }
 
 
 
     this.getCars = function getCars() {
-        autosService.getCars()
-        drawCar()
+        autosService.getCars(drawCar)
     }
 
-    //drawCar()
+    getCars()
 }

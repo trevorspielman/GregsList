@@ -38,43 +38,42 @@
     <section>
         <div class="container-fluid">
             <div class="row" id="form">
-                <div class="col-6 d-flex justify-content-center">
-                    <button class="m-2 btn-danger" type="submit" id="addCar">Add a Car?</button>
-                    <form class="m-2 hidden" onsubmit="app.controllers.autosCtrl.addCar(event)" id="car-form">
+                <!-- <div class="col-8 offset-2 d-flex justify-content-center">
+                    <form class="m-2" onsubmit="app.controllers.propertiesCtrl.addProperty(event)" id="property-form">
                         <div class="form-row">
-                            <label for="manufacturer-select">Manufacturer</label>
-                            <select name="make" multiple class="form-control hidden transition" id="manufac-form" required>
-                            </select>
-                            <label for="manufacturer-select">Model</label>
-                            <select name="model" multiple class="form-control hidden transition" id="model-form" required>
-                            </select>
-                        </div>
-                        <div class="form-row hidden transition" id="third-form-section">
-                            <input type="number" name="year" placeholder="Year" id="model-year" required>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="condition" value="0" required>
-                                <label class="form-check-label" value="0">New</label>
+                            <div class="col">
+                                <input type="text" name="make" placeholder="Make" required>
+                                <input type="text" name="model" placeholder="Model" required>
+                                <input type="url" name="img" placeholder="Image Link">
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="condition" value="1" required>
-                                <label class="form-check-label">Like New</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="condition" value="2" required>
-                                <label class="form-check-label">Fair</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="condition" value="3" required>
-                                <label class="form-check-label">Junker</label>
+                            <div class="col">
+                                <input type="number" name="year" placeholder="Year Built">
+                                <input type="number" name="price" placeholder="Price" required>
                             </div>
                         </div>
-                        <div class="form-row hidden transition" id="final-form-section">
-                            <input type="url" name="img" placeholder="Image Link" required>
-                            <input id="car-price" type="number" name="price" placeholder="Price" required>
-                            <button class="m-2 btn-success hidden transition" type="submit" id="submit-button">Submit</button>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="condition" value="0" required>
+                                    <label class="form-check-label" value="0">New</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="condition" value="1" required>
+                                    <label class="form-check-label">Like New</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="condition" value="2" required>
+                                    <label class="form-check-label">Fair</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="condition" value="3" required>
+                                    <label class="form-check-label">Junker</label>
+                                </div>
+                            </div>
                         </div>
+                        <button class="m-2 btn-success" type="submit">Submit</button>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
